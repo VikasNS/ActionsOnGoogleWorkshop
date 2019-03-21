@@ -1,8 +1,13 @@
+ conv.ask('<speak> Connected to police.<audio src="https://s3-us-west-2.amazonaws.com/wss18/police-walkie-talkie-radio.ogg"></audio></speak>');
+
+
+
 conv.ask(new SimpleResponse({
   speech: 'Howdy, this is GeekNum. I can tell you fun facts about almost any number, my favorite is 42. What number do you have in mind?',
   text: 'Howdy! I can tell you fun facts about almost any number. What do you have in mind?',
 }));
 
+conv.ask(new Suggestions(['suggestion 1', 'suggestion 2']));
 
 conv.ask(new BasicCard({
   text: `This is a basic card.  Text in a basic card can include "quotes" and
@@ -25,8 +30,7 @@ conv.ask(new BasicCard({
 }));
 
 
-conv.ask('This is a browse carousel example.');
-// Create a browse carousel
+
 conv.ask(new BrowseCarousel({
   items: [
     new BrowseCarouselItem({
@@ -51,3 +55,10 @@ conv.ask(new BrowseCarousel({
     }),
   ],
 }));
+
+
+app.intent('Default Welcome Intent', (conv, {color}) => {
+    const luckyNumber = color.length;
+    // Respond with the user's lucky number and end the conversation.
+    conv.close('Your lucky number is ' + luckyNumber);
+});
