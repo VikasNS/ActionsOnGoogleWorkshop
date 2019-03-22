@@ -21,11 +21,13 @@ const functions = require('firebase-functions');
 
 const app = dialogflow({debug: true});
 
-// Handle the Dialogflow intent named 'favorite color'.
-// The intent collects a parameter named 'color'.
+
+app.intent('Default Welcome Intent', (conv) => {
+    conv.user.storage.count = 0;
+    conv.ask("Welcome");
+  
+     
+});
 
 
-// Set the DialogflowApp object to handle the HTTPS POST request.
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app);
-
-
